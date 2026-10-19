@@ -51,10 +51,9 @@ The receipt must say which judge made it, and the repository must say how old is
 - **In the receipt:** the judge's commit is a signed member `executor.judge_commit`. The
   verifier already accepts and signs over an extra member in that block (evidence case 7 and 8,
   `evidence/trust/README.md`).
-- **Rule:** the desk refuses a receipt if `executor.judge_commit` is missing, is not a commit at
-  or after `.aien/judge.min` in aien-sovereign-core's history (`git merge-base --is-ancestor`), or
-  differs from the commit in the node's registry block by more than the registry says (a node
-  may be ahead of its registry line, never behind the minimum).
+- **Rule:** the desk refuses a receipt if `executor.judge_commit` is missing, or is not a commit at
+  or after `.aien/judge.min` in aien-sovereign-core's history (`git merge-base --is-ancestor`).
+  The registry's "judge commit" line is a record for audits; it is not part of this check.
 
 **Gap, stated plainly:** the receipt the project's Spark publishes today has no
 `judge_commit` member (see `evidence/trust/bundle.original.json`: the `executor` block holds

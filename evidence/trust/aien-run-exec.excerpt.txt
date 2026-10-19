@@ -1,0 +1,48 @@
+# Source: /usr/local/sbin/aien-run-exec on the project's Spark, read 2026-10-19 (header comment and the unshare lines)
+#!/bin/bash
+# aien-run-exec: the C8 exec contract of the sovereign local pipeline (lane INFRA).
+#
+#   aien-run-exec --cwd DIR --timeout SECS --profile host|qemu|gb10 [--env K=V]... -- PROGRAM [ARGS...]
+#
+# Runs PROGRAM as the unprivileged system user `aien-run` with:
+#   * a cleared environment: only PATH, HOME, CARGO_HOME, RUSTUP_HOME and the explicit --env pairs survive;
+#   * a private mount namespace in which the whole sandbox home /var/lib/aien-run is READ-ONLY except
+#     (a) the one worktree that contains --cwd and (b) the one target dir named by --env CARGO_TARGET_DIR.
+#     So a check can never plant files that a later check (another PR, or a `main` qualification) would
+#     pick up: no ~/.cargo/config.toml, no swapped registry or cargo binary, no edits to another worktree,
+#     no writes into the other trust class's target dir;
+#   * private, empty /var/tmp, /var/crash, /var/lib/BrlAPI for every profile, and private /tmp, /dev/shm, /run/lock,
+#     /run/screen plus a fresh IPC namespace (SysV shm, semaphores, POSIX queues) for host|qemu (gb10 keeps the
+#     host /tmp, /dev/shm and IPC so chip tooling behaves as before);
+#   * a fresh network namespace for host|qemu: only its own loopback `lo`, brought up so tests can talk to a
+#     server they start on 127.0.0.1 (the namespace has no other interface, so nothing outside it is reachable,
+#     not even the host's own 127.0.0.1 services; no DNS);
+#   * a transient systemd scope under aien-run.slice with cgroup caps (memory, pids, cpu) and a
+#     device policy (host|qemu: standard pseudo devices only, qemu adds /dev/kvm; gb10: all devices);
+#   * the operator's model directory (~/models of the sudo caller) mounted READ-ONLY at /var/lib/aien-run/models
+#     when both exist (install.sh makes the empty root-owned mount point), so model gates such as PREFILL-E2E-2
+#     find their checkpoint at $HOME/models without any write access to it; without it the gate reports
+#     NOT_RUN model_missing;
+#   * rlimits (no core dumps, bounded open files);
+#   * `timeout --signal=TERM --kill-after=10 SECS` for host|qemu (exit 124 on expiry);
+#   * NO timeout for gb10: chip runs are never killed; the engine's advisory timeout only marks the receipt.
+# stdout/stderr pass through. The exit code of PROGRAM passes through (124 = timeout, 137 = killed).
+# Exit 2 = refused by this script (bad arguments or unsafe host layout); PROGRAM did not run.
+# When the command finishes the whole scope is stopped, so a crashed check leaves no stray processes.
+...
+# host|qemu run in their own network namespace (unshare -n above): raise its loopback, nothing else exists in it.
+case $profile in host|qemu) ip link set lo up ;; esac
+exec "$@"
+'
+
+# Model directory of the operator who called sudo, if any (read-only bind, see the header).
+models_src=""
+if [[ -n ${SUDO_USER:-} && $SUDO_USER != root ]]; then
+  op_home=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+  if [[ -n $op_home && -d $op_home/models && -d $RUN_HOME/models ]]; then models_src=$(realpath -e -- "$op_home/models"); fi
+fi
+
+inner=()
+case "$profile" in
+  host|qemu) inner+=(unshare -m -n -i --propagation private --) ;;
+  gb10)      inner+=(unshare -m --propagation private --) ;;
