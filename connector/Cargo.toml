@@ -1,0 +1,21 @@
+[package]
+name = "spark-connector"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+description = "Volunteer DGX Spark node for the AIEN merge pipeline: runs the aien-test judge on open pull request heads in the sandbox user and publishes signed receipts"
+publish = false
+
+# Same crate versions as aien-sovereign-core's Cargo.lock, so a Spark that built the judge
+# builds this offline from the same registry cache.
+[dependencies]
+serde_json = "=1.0.151"
+sha2 = "=0.10.9"
+
+[[bin]]
+name = "spark-connector"
+path = "src/main.rs"
+
+[lib]
+name = "spark_connector"
+path = "src/lib.rs"
