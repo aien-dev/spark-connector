@@ -1,0 +1,41 @@
+### 1. original bundle, project key
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle evidence/trust/bundle.original.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey evidence/trust/aegis-runtime.verify.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle d9af3c143b0fa566ef554abd251be4c490c799dbe0ccf324c9966289ef90c634
+exit code: 0
+
+### 2. altered copy: first PASS changed to FAIL
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/flip.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey evidence/trust/aegis-runtime.verify.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: REJECTED BAD_SIGNATURE: signature does not verify over the canonical bytes
+exit code: 3
+
+### 3. altered copy: one receipt digit changed
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/digit.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey evidence/trust/aegis-runtime.verify.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: REJECTED BAD_SIGNATURE: signature does not verify over the canonical bytes
+exit code: 3
+
+### 4. original bundle presented for a different commit
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle evidence/trust/bundle.original.json --repo github.com/aien-dev/aegis-runtime --commit 0000000000000000000000000000000000000000 --pubkey evidence/trust/aegis-runtime.verify.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: REJECTED COMMIT_MISMATCH: bundle is for f85dbe3910dd2c29faff74a3a96d657531ca1320, gating 0000000000000000000000000000000000000000
+exit code: 3
+
+### 5. same content signed by an unregistered key, checked against the registered key
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/resigned.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey evidence/trust/aegis-runtime.verify.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: REJECTED UNKNOWN_KEY: bundle key is not the committed verify.pub
+exit code: 3
+
+### 6. the same bundle checked against the stranger's own key (the file is well formed; only the registry decides whether that key counts)
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/resigned.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey /tmp/tmp.rqxouWbZKx/stranger.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle be4a9bbb04d21b016b877f15cdf430c7b0f25f44e64b76ebf7767b23236bc058
+exit code: 0
+
+### 7. test-key bundle that also carries executor.judge_commit, signed
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/jc.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey /tmp/tmp.rqxouWbZKx/stranger.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle 05d53879a255e25ccb974eb1dc4045bbdde69c780a88997a0c258c52ae5902f6
+exit code: 0
+
+### 8. same bundle with judge_commit edited after signing
+$ /home/drakestapleton/workspace/spark-connector-trust-judge/asc/target/release/aien-test verify-bundle /tmp/tmp.rqxouWbZKx/jc.tampered.json --repo github.com/aien-dev/aegis-runtime --commit f85dbe3910dd2c29faff74a3a96d657531ca1320 --pubkey /tmp/tmp.rqxouWbZKx/stranger.pub --require CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+AIEN Verification: REJECTED BAD_SIGNATURE: signature does not verify over the canonical bytes
+exit code: 3
+
+RESULT: every case behaved as the policy needs
