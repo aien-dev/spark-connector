@@ -1,0 +1,7 @@
+NOTE sibling ../aien-protocols: aien-protocols origin/main 4529f393546c87d5ae673e5d66d700c8e8c5db03
+GATE AEGIS-ANTI-SLOP run PASS
+GATE AEGIS-ZERO-DISK-SECRETS run PASS
+GATE CRUMB-VERIFY run PASS
+BUNDLE ~/.local/state/spark-connector-l119/judge-state/bundles/aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.json 0ac02cac575b412cc0d28a3802444cf44aa5b377f98f5fad6c662ce7262bb987
+PUBLICATION local
+AIEN_TEST: PASS

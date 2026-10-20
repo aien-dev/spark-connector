@@ -1,0 +1,15 @@
+# 2026-10-20T00:02:09Z verify-two-receipts.sh with the node's judge (aien-sovereign-core 10b4f851)
+sha256 project.json c724b154be9b19ed89903d8bba84ceb7fe4183be7c0ae9a9cf33c1c273d170f2
+sha256 node.json    886e11ad03a6f61cd6bec4c173b184adf1e673981409fa62da0ced65ce77ff82
+project key 01368e0b02dc1113ae7425ad6ab00fdf5aa7dd97e0690745918a52f051d5cf68
+node key    8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+required    CRUMB-VERIFY,AEGIS-ZERO-DISK-SECRETS,AEGIS-ANTI-SLOP
+A. project receipt, project key                            expect 0 got 0  AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle c724b154be9b19ed89903d8bba84ceb7fe4183be7c0ae9a9cf33c1c273d170f2
+B. node receipt, node key                                  expect 0 got 0  AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle 886e11ad03a6f61cd6bec4c173b184adf1e673981409fa62da0ced65ce77ff82
+C. node receipt under the project key (refused)            expect 3 got 3  AIEN Verification: REJECTED UNKNOWN_KEY: bundle key is not the committed verify.pub
+D. project receipt under the node key (refused)            expect 3 got 3  AIEN Verification: REJECTED UNKNOWN_KEY: bundle key is not the committed verify.pub
+E. node receipt with verdict flipped (refused)             expect 3 got 3  AIEN Verification: REJECTED BAD_SIGNATURE: signature does not verify over the canonical bytes
+F. node receipt for another commit (refused)               expect 3 got 3  AIEN Verification: REJECTED COMMIT_MISMATCH: bundle is for bfa6b636f33f44a68a48d8f560c069fd1f99882d, gating 0000000000000000000000000000000000000000
+node executor block: "executor":{"class":"spark","id":"943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0","judge_commit":"10b4f851d6b082df6c2c477fbab700b551b854be","machine_digest":"55574213acb2724f71f4d71cf01ba40d745451e4246c1fbef4fa1d1e97acaf1d"}
+ALL 6 AS EXPECTED
+exit 0

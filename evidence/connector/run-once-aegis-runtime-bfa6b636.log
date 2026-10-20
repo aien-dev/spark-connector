@@ -1,0 +1,57 @@
+# spark-connector run --once, 2026-10-20T00:01:28Z, node spark-b87b-node2, head aegis-runtime PR #60 bfa6b636f33f44a68a48d8f560c069fd1f99882d
+spark-connector: $ date -u +%Y-%m-%dT%H:%M:%SZ
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/judge rev-parse HEAD
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/judge status --porcelain --untracked-files=no
+spark-connector: $ gh api repos/aien-dev/aien-sovereign-core --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/omega --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/aienos --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/physics --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/aien-protocols --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/aegis-runtime --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/spark-rsi --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/aien-architecture --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/benchmarks --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/synapse --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/interplane --jq .permissions.push // false
+spark-connector: $ gh api repos/aien-dev/aien-receipts --jq .permissions.push // false
+spark-connector: token check: WIDE TOKEN (push to aien-sovereign-core,omega,aienos,physics,aien-protocols,aegis-runtime,spark-rsi,aien-architecture,benchmarks,synapse,interplane,aien-receipts) accepted only because --project-spark-test was given; the node still writes only to drakestapleton/aien-receipts
+spark-connector: $ git clone -q https://github.com/aien-dev/aegis-runtime.git ~/.local/state/spark-connector-l119/clones/aegis-runtime
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aien-architecture fetch -q origin
+spark-connector: $ git clone -q https://github.com/aien-dev/aien-protocols.git ~/.local/state/spark-connector-l119/clones/aien-protocols
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime fetch -q origin bfa6b636f33f44a68a48d8f560c069fd1f99882d
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime cat-file -e bfa6b636f33f44a68a48d8f560c069fd1f99882d^{commit}
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime ls-tree -r --name-only bfa6b636f33f44a68a48d8f560c069fd1f99882d
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-anti-slop.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-check.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-clippy.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-fmt.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-test.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/aegis-zero-disk-secrets.gate
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show bfa6b636f33f44a68a48d8f560c069fd1f99882d:tests/gates/crumb.gate
+spark-connector: $ nice -n 19 ionice -c3 ~/.local/state/spark-connector-l119/judge/target/release/aien-test worker --once aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d --state-dir ~/.local/state/spark-connector-l119/judge-state --clones ~/.local/state/spark-connector-l119/clones --key ~/.local/state/spark-connector-l119/node.key --sandbox user --wt-tool ~/.local/state/spark-connector-l119/judge/tools/aien-local-ci/wt.sh --siblings ~/.local/state/spark-connector-l119/judge/tools/aien-local-ci/siblings (log ~/.local/state/spark-connector-l119/logs/aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d.log)
+spark-connector: $ ~/.local/state/spark-connector-l119/judge/target/release/aien-test bundle-sign ~/.local/state/spark-connector-l119/signed/aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d.unsigned.json --key ~/.local/state/spark-connector-l119/node.key --out ~/.local/state/spark-connector-l119/signed/aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d.json
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/clones/aegis-runtime show origin/main:.aien/always
+spark-connector: $ date -u +%Y-%m-%dT%H:%M:%SZ
+spark-connector: $ git clone -q https://github.com/aien-dev/aien-receipts.git ~/.local/state/spark-connector-l119/receipts
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts remote
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts remote add fork https://github.com/drakestapleton/aien-receipts.git
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts fetch -q origin main
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts cat-file -e origin/main:aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts checkout -q -B node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f origin/main
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts add -- aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts diff --cached --name-only
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts -c user.name=spark-connector spark-b87b-node2 -c user.email=8d750f9ae2d4086e@nodes.spark-connector.invalid commit -q -m node 8d750f9ae2d4086e: aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d PASS
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts push -q --force fork node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f:node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f
+spark-connector: $ git -C ~/.local/state/spark-connector-l119/receipts checkout -q --detach origin/main
+spark-connector: $ gh pr list -R aien-dev/aien-receipts --head node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f --state open --json url --jq .[0].url // empty
+spark-connector: $ gh pr create -R aien-dev/aien-receipts --base main --head drakestapleton:node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f --title node 8d750f9ae2d4086e: aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d PASS --body Community node receipt (spark-connector).
+
+- file: `aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json` (new file; the project's `bundle.json` is not touched)
+- node: spark-b87b-node2 (prefix 8d750f9ae2d4086e)
+- judge commit: 10b4f851d6b082df6c2c477fbab700b551b854be
+- result: PASS
+
+Check it yourself: `aien-test verify-bundle aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json --repo github.com/aien-dev/aegis-runtime --commit bfa6b636f33f44a68a48d8f560c069fd1f99882d --pubkey <the node's key from NODES.md>`. Until the node is in NODES.md this receipt is advisory only.
+
+aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d: Judged("pushed to drakestapleton/aien-receipts but no pull request yet (gh pr failed (exit status: 98): gh guard: WATCHDOG ALARM: CRUMB-DRIFT: 4 crumb check(s) fail: AGREE aien-sovereign-core #674 1e2a8000; AGREE aien-protocols main 4529f393; AGREE aegis-runtime main f85dbe39; AGREE spark-rsi main 3d5dc2f1; (run: crumb-doctor; since 2026-10-19T23:47:35Z)\ngh guard: WATCHDOG ALARM: NEW-AUTOSTART: not on the reviewed list (~/.config/aien-watch/known-autostart.txt): cron 30 6 * * * PATH=/usr/bin:/bin $HOME/workspace/crumb-notes/crumb-notes-scan >> $HOME/workspace/c;cron */5 * * * * PATH=/usr/bin:/bin:~/.local/bin ~/.local/bin/;cron @reboot $HOME/.local/bin/spark-sensors (since 2026-10-20T00:01:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)\ngh guard: WATCHDOG ALARM: ORPHANS: left running after their chat stopped (check each, stop what is not needed; never a chip run): 12 headless Chrome pieces with no browser left (older than 10 min); (since 2026-10-20T00:01:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)\nGitHub guard: refused: only the PR desk chat opens, edits, merges, comments on or closes pull requests (Drake 2026-10-18).\nGitHub guard: desk holder: Hermes chat \"Survey overnight agents status overview\" (session 20261019_071956_4f0d59, Drake MacBook desktop, drives Spark over ssh) and the desk subagents it spawns. SOLE owner of every PR, merge and lane. [hermes-survey-overnight-20261019] (job hermes); you are chat 0f7d6718.\nGitHub guard: push your branch and send the desk one line: READY <repo> <branch> <sha> <exact test command> <result>.); retried next round")
+exit 0

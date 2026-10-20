@@ -1,0 +1,9 @@
+# install.sh run 1 on spark-b87b, 2026-10-20T00:00:32Z, SPARK_CONNECTOR_HOME=~/.local/state/spark-connector-l119
+[spark-connector install] packages present
+[spark-connector install] rust 1.98.1 present
+gh guard: WATCHDOG ALARM: CRUMB-DRIFT: 4 crumb check(s) fail: AGREE aien-sovereign-core #674 1e2a8000; AGREE aien-protocols main 4529f393; AGREE aegis-runtime main f85dbe39; AGREE spark-rsi main 3d5dc2f1; (run: crumb-doctor; since 2026-10-19T23:47:35Z)
+gh guard: WATCHDOG ALARM: NEW-AUTOSTART: not on the reviewed list (~/.config/aien-watch/known-autostart.txt): cron 30 6 * * * PATH=/usr/bin:/bin $HOME/workspace/crumb-notes/crumb-notes-scan >> $HOME/workspace/c;cron */5 * * * * PATH=/usr/bin:/bin:~/.local/bin ~/.local/bin/;cron @reboot $HOME/.local/bin/spark-sensors (since 2026-10-20T00:00:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)
+gh guard: WATCHDOG ALARM: ORPHANS: left running after their chat stopped (check each, stop what is not needed; never a chip run): 12 headless Chrome pieces with no browser left (older than 10 min); (since 2026-10-20T00:00:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)
+[spark-connector install] GitHub: drakestapleton, publishing through drakestapleton/aien-receipts
+[spark-connector install] STOP: ~/.local/state/spark-connector-l119/judge has local changes; move them away first
+exit 1

@@ -1,0 +1,17 @@
+# refusal tests, 2026-10-20T00:02:58Z, node spark-b87b-node2
+## 1. wide token (this Spark's token is the project owner's, push on every repo): run without --project-spark-test
+spark-connector: the GitHub token can push to aien-dev/{aien-sovereign-core,omega,aienos,physics,aien-protocols,aegis-runtime,spark-rsi,aien-architecture,benchmarks,synapse,interplane,aien-receipts}; a node needs a token that can write only to its fork drakestapleton/aien-receipts (see README, Run a node)
+exit 1
+## 2. a second poller on the same node while the lock is held
+spark-connector: another spark-connector run already holds ~/.local/state/spark-connector-l119/run.lock; one node runs one poller
+exit 1
+[1]+  Done                    flock "$H/run.lock" sleep 15
+## 3. a head whose gates need the chip: physics main 14273c5ce7d13fbc6e410c4fed9aa36837918177
+spark-connector: token check: WIDE TOKEN (push to aien-sovereign-core,omega,aienos,physics,aien-protocols,aegis-runtime,spark-rsi,aien-architecture,benchmarks,synapse,interplane,aien-receipts) accepted only because --project-spark-test was given; the node still writes only to drakestapleton/aien-receipts
+physics 14273c5ce7d13fbc6e410c4fed9aa36837918177: Skipped("chip gates PHYSICS-FORGE-GATE34,PHYSICS-M15,PHYSICS-M16-REQUAL,PHYSICS-NVRM-LIFECYCLE,PHYSICS-SUBMISSION-VISIBILITY (v0 nodes run no-network checks only)")
+spark-connector: physics 14273c5ce7d13fbc6e410c4fed9aa36837918177 not judged: Skipped("chip gates PHYSICS-FORGE-GATE34,PHYSICS-M15,PHYSICS-M16-REQUAL,PHYSICS-NVRM-LIFECYCLE,PHYSICS-SUBMISSION-VISIBILITY (v0 nodes run no-network checks only)")
+exit 1
+done marker: SKIPPED chip gates PHYSICS-FORGE-GATE34,PHYSICS-M15,PHYSICS-M16-REQUAL,PHYSICS-NVRM-LIFECYCLE,PHYSICS-SUBMISSION-VISIBILITY (v0 nodes run no-network checks only)
+## 4. the same head twice: the judged head is skipped by the poll loop (done marker), --once refuses nothing silently
+aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d
+physics.14273c5ce7d13fbc6e410c4fed9aa36837918177

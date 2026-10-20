@@ -1,0 +1,35 @@
+# install.sh run 2 on spark-b87b, 2026-10-20T00:00:57Z, SPARK_CONNECTOR_HOME=~/.local/state/spark-connector-l119 (run 1 stopped at the judge checkout check, fixed)
+[spark-connector install] packages present
+[spark-connector install] rust 1.98.1 present
+gh guard: WATCHDOG ALARM: CRUMB-DRIFT: 4 crumb check(s) fail: AGREE aien-sovereign-core #674 1e2a8000; AGREE aien-protocols main 4529f393; AGREE aegis-runtime main f85dbe39; AGREE spark-rsi main 3d5dc2f1; (run: crumb-doctor; since 2026-10-19T23:47:35Z)
+gh guard: WATCHDOG ALARM: NEW-AUTOSTART: not on the reviewed list (~/.config/aien-watch/known-autostart.txt): cron 30 6 * * * PATH=/usr/bin:/bin $HOME/workspace/crumb-notes/crumb-notes-scan >> $HOME/workspace/c;cron */5 * * * * PATH=/usr/bin:/bin:~/.local/bin ~/.local/bin/;cron @reboot $HOME/.local/bin/spark-sensors (since 2026-10-20T00:00:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)
+gh guard: WATCHDOG ALARM: ORPHANS: left running after their chat stopped (check each, stop what is not needed; never a chip run): 12 headless Chrome pieces with no browser left (older than 10 min); (since 2026-10-20T00:00:01Z; details ~/.local/state/aienos/watch/alerts.log; clear with: aien-watch clear)
+[spark-connector install] GitHub: drakestapleton, publishing through drakestapleton/aien-receipts
+[spark-connector install] judge built: ~/.local/state/spark-connector-l119/judge/target/release/aien-test at 10b4f851d6b082df6c2c477fbab700b551b854be
+[spark-connector install] sandbox present: user aien-run and /usr/local/sbin/aien-run-exec identical to the judge's copy (skipped)
+[spark-connector install] installed ~/.local/bin/spark-connector
+spark-connector: $ gh api user --jq .login
+spark-connector: $ date -u +%Y-%m-%dT%H:%M:%SZ
+spark-connector: $ ~/.local/state/spark-connector-l119/judge/target/release/aien-test keygen ~/.local/state/spark-connector-l119/node.key
+spark-connector: $ nvidia-smi -L
+spark-connector: $ date -u +%Y-%m-%dT%H:%M:%SZ
+node home   ~/.local/state/spark-connector-l119
+public key  8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+executor id 943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0
+receipts    <repo>/<sha>/bundle.8d750f9ae2d4086e.json via drakestapleton/aien-receipts
+
+Registration request: add this block to NODES.md in aien-dev/aien-receipts with a pull request.
+Until Drake merges it, this node's receipts are advisory only.
+
+## spark-b87b-node2
+- status: (left for Drake)
+- public key: 8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+- executor id: 943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0
+- operator: drakestapleton
+- gpu: GPU-fb8e53f0-3207-e89b-d02f-acdfe2695b59
+- judge commit: 10b4f851d6b082df6c2c477fbab700b551b854be
+- date added: 2026-10-20
+- approved by: (left for Drake)
+- notes: receipts published as <repo>/<sha>/bundle.8d750f9ae2d4086e.json
+[spark-connector install] not started. Send the block above as your registration request; start later with: connector/install.sh --start
+exit 0

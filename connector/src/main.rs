@@ -386,11 +386,9 @@ fn judge_head(
     if !busy.is_empty() {
         return Ok(Outcome::Busy(busy));
     }
-    // Trusted side: fetch the head and the checkouts its gates reach.
+    // Trusted side: fetch the head; the chip check reads its gate files first,
+    // so a head the node will not judge costs no neighbour clones.
     ensure_clone(home, &cfg.owner, repo)?;
-    for n in neighbours(cfg, repo) {
-        ensure_clone(home, &cfg.owner, &n)?;
-    }
     let clone = home.clones().join(repo);
     let refspec = match pr {
         Some(n) => format!("+refs/pull/{n}/head:refs/remotes/origin/pr/{n}"),
@@ -406,6 +404,9 @@ fn judge_head(
         );
         write_done(home, repo, sha, &format!("SKIPPED {why}"))?;
         return Ok(Outcome::Skipped(why));
+    }
+    for n in neighbours(cfg, repo) {
+        ensure_clone(home, &cfg.owner, &n)?;
     }
 
     // The judge, exactly as the project's Spark runs it, with the node's key

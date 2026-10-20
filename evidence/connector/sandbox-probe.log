@@ -1,0 +1,15 @@
+# sandbox probe, 2026-10-20T00:02:44Z, spark-b87b (the shim every node check runs through)
+sha256 /usr/local/sbin/aien-run-exec: bed3d61e69b64a5d8fb1467be5aed4d51470c7418a9cd09fbbfabb8ed43d8ba0
+sandbox_helper_sha256 in the node's receipts:
+      3 "sandbox_helper_sha256":"bed3d61e69b64a5d8fb1467be5aed4d51470c7418a9cd09fbbfabb8ed43d8ba0"
+--- as the sandbox runs a check (profile host):
+user: aien-run
+network interfaces:
+ lo
+dns github.com: none (exit 2)
+tcp to 140.82.112.3:443: bash: connect: Network is unreachable
+read node key: cat: ~/.local/state/spark-connector-l119/node.key: Permission denied
+exit 0
+--- same commands outside the sandbox (control):
+dns github.com: 140.82.112.3    github.com
+tcp to 140.82.112.3:443: connected

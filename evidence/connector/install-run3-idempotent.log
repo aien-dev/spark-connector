@@ -1,0 +1,36 @@
+# install.sh run 3 (idempotency), 2026-10-20T00:04:00Z
+before:
+edcd8f95a0eaac83451b1eb6b574a62e4bd92324edbe746fa6bbbe70daba7f00  node.key
+630512eb2f232f3ea780d3c69a18b782f0b4772bb9ba101766f8bc360553edd1  node.pub
+c52cf9566dafe941b70aa39443ff4b127f49bf529cd6a3a6802c4ba73f637eb9  node.conf
+[spark-connector install] packages present
+[spark-connector install] rust 1.98.1 present
+[spark-connector install] GitHub: drakestapleton, publishing through drakestapleton/aien-receipts
+[spark-connector install] judge built: ~/.local/state/spark-connector-l119/judge/target/release/aien-test at 10b4f851d6b082df6c2c477fbab700b551b854be
+[spark-connector install] sandbox present: user aien-run and /usr/local/sbin/aien-run-exec identical to the judge's copy (skipped)
+[spark-connector install] installed ~/.local/bin/spark-connector
+node home   ~/.local/state/spark-connector-l119
+public key  8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+executor id 943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0
+receipts    <repo>/<sha>/bundle.8d750f9ae2d4086e.json via drakestapleton/aien-receipts
+
+Registration request: add this block to NODES.md in aien-dev/aien-receipts with a pull request.
+Until Drake merges it, this node's receipts are advisory only.
+
+## spark-b87b-node2
+- status: (left for Drake)
+- public key: 8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+- executor id: 943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0
+- operator: drakestapleton
+- gpu: GPU-fb8e53f0-3207-e89b-d02f-acdfe2695b59
+- judge commit: 10b4f851d6b082df6c2c477fbab700b551b854be
+- date added: 2026-10-20
+- approved by: (left for Drake)
+- notes: receipts published as <repo>/<sha>/bundle.8d750f9ae2d4086e.json
+[spark-connector install] not started. Send the block above as your registration request; start later with: connector/install.sh --start
+exit 0
+after:
+edcd8f95a0eaac83451b1eb6b574a62e4bd92324edbe746fa6bbbe70daba7f00  node.key
+630512eb2f232f3ea780d3c69a18b782f0b4772bb9ba101766f8bc360553edd1  node.pub
+c52cf9566dafe941b70aa39443ff4b127f49bf529cd6a3a6802c4ba73f637eb9  node.conf
+KEY, PUBLIC KEY AND SETTINGS UNCHANGED

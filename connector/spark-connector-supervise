@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# spark-connector-supervise: keep one `spark-connector run` going. Started by the cron @reboot line that
+# `install.sh --start` adds (a plain loop, no service manager). One supervisor per node home (flock), and the
+# node itself refuses a second poller (run.lock). Log: <node home>/node.log.
+set -uo pipefail
+HOME_DIR=${SPARK_CONNECTOR_HOME:-$HOME/.spark-connector}
+BIN=${SPARK_CONNECTOR_BIN:-$HOME/.local/bin/spark-connector}
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/bin"
+mkdir -p "$HOME_DIR"
+exec 9>"$HOME_DIR/supervise.lock"
+flock -n 9 || { echo "spark-connector-supervise: already running for $HOME_DIR" >&2; exit 0; }
+while :; do
+  printf '%s supervise: starting run\n' "$(date -u +%FT%TZ)" >>"$HOME_DIR/node.log"
+  "$BIN" run --home "$HOME_DIR" >>"$HOME_DIR/node.log" 2>&1; rc=$?
+  printf '%s supervise: run exited %s, restarting in 60 s\n' "$(date -u +%FT%TZ)" "$rc" >>"$HOME_DIR/node.log"
+  sleep 60
+done

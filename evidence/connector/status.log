@@ -1,0 +1,13 @@
+# spark-connector status, 2026-10-20T00:04:05Z
+node        spark-b87b-node2 (~/.local/state/spark-connector-l119)
+public key  8d750f9ae2d4086e5b67370e684f606aa8aa8755af600069aa85ffce4376b206
+executor id 943ac5aa95d19d56f2725bc327ede5f530d3d4ef1133d88267ecf7505892f7a0
+judge       ~/.local/state/spark-connector-l119/judge/target/release/aien-test at 10b4f851d6b082df6c2c477fbab700b551b854be
+publishes   <repo>/<sha>/bundle.8d750f9ae2d4086e.json via drakestapleton/aien-receipts
+poller      not running
+judged      2
+  physics.14273c5ce7d13fbc6e410c4fed9aa36837918177  SKIPPED chip gates PHYSICS-FORGE-GATE34,PHYSICS-M15,PHYSICS-M16-REQUAL,PHYSICS-NVRM-LIFECYCLE,PHYSICS-SUBMISSION-VISIBILITY (v0 nodes run no-network checks only)
+  aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d  2026-10-20T00:01:41Z PASS verify-bundle exit 0: AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle 886e11ad03a6f61cd6bec4c173b184adf1e673981409fa62da0ced65ce77ff82 | j
+to publish  1
+  aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d  PASS
+published   0
