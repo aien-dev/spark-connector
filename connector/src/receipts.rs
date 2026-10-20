@@ -30,6 +30,11 @@ pub fn receipt_path(repo: &str, sha: &str, prefix: &str) -> Result<String, Strin
     Ok(format!("{repo}/{sha}/bundle.{prefix}.json"))
 }
 
+/// The GitHub page that opens a pull request from the fork branch.
+pub fn compare_url(owner: &str, fork_owner: &str, branch: &str) -> String {
+    format!("https://github.com/{owner}/{RECEIPTS_REPO}/compare/main...{fork_owner}:{RECEIPTS_REPO}:{branch}?expand=1")
+}
+
 /// The branch a receipt travels on in the fork.
 pub fn branch_name(repo: &str, sha: &str, prefix: &str) -> String {
     format!("node-{prefix}/{repo}-{}", &sha[..12])
@@ -41,8 +46,13 @@ pub enum Published {
     AlreadyOnShelf,
     /// A pull request carries it (URL).
     PullRequest(String),
-    /// Pushed to the fork; the pull request could not be opened (why).
-    PushedOnly(String),
+    /// Pushed to the fork; the pull request could not be opened. A token
+    /// limited to the fork cannot open pull requests on aien-dev (GitHub:
+    /// fine-grained tokens do not support contributing to public repositories
+    /// the user is not a member of), so this is the normal end state for such
+    /// a node: the receipt waits on the fork branch, and `compare` is the link
+    /// that opens the pull request in a browser.
+    PushedOnly { compare: String, why: String },
 }
 
 fn ensure_clone(home: &Home, cfg: &Config) -> Result<(), String> {
@@ -161,7 +171,10 @@ pub fn publish(
         Ok(out) => Ok(Published::PullRequest(
             out.lines().last().unwrap_or("").trim().to_string(),
         )),
-        Err(e) => Ok(Published::PushedOnly(e)),
+        Err(e) => Ok(Published::PushedOnly {
+            compare: compare_url(&cfg.owner, cfg.fork_owner(), &branch),
+            why: e.lines().last().unwrap_or("").chars().take(200).collect(),
+        }),
     }
 }
 
@@ -185,6 +198,10 @@ mod tests {
         assert_eq!(
             branch_name("aegis-runtime", S, "0123456789abcdef"),
             "node-0123456789abcdef/aegis-runtime-bfa6b636f33f"
+        );
+        assert_eq!(
+            compare_url("aien-dev", "alice", "node-0123456789abcdef/aegis-runtime-bfa6b636f33f"),
+            "https://github.com/aien-dev/aien-receipts/compare/main...alice:aien-receipts:node-0123456789abcdef/aegis-runtime-bfa6b636f33f?expand=1"
         );
     }
 }

@@ -7,7 +7,7 @@ use spark_connector::node::{
     RECEIPTS_REPO,
 };
 use spark_connector::procs;
-use spark_connector::receipts::{self, Published};
+use spark_connector::receipts;
 use spark_connector::sh;
 use std::fs::{self, File, OpenOptions};
 use std::io::Write;
@@ -17,7 +17,7 @@ use std::time::Duration;
 
 const USAGE: &str = "usage:
   spark-connector join   [--home DIR] [--name NAME] [--fork OWNER/aien-receipts] [--judge-commit SHA40] [--judge-src DIR]
-  spark-connector run    [--home DIR] [--once REPO SHA] [--iterations N] [--no-publish] [--project-spark-test]
+  spark-connector run    [--home DIR] [--once REPO SHA] [--iterations N] [--no-publish] [--rejudge] [--project-spark-test]
   spark-connector status [--home DIR]
 The node home defaults to $SPARK_CONNECTOR_HOME or ~/.spark-connector.";
 
@@ -189,6 +189,16 @@ fn run(args: &[String]) -> Result<(), String> {
     if let Some(i) = args.iter().position(|a| a == "--once") {
         let repo = args.get(i + 1).ok_or("--once needs REPO SHA")?;
         let sha = args.get(i + 2).ok_or("--once needs REPO SHA")?;
+        // A head this node already judged is not judged again: finish its
+        // publication if one is pending, else show the earlier result.
+        if home.done(repo, sha).exists() && !has(args, "--rejudge") {
+            let done = fs::read_to_string(home.done(repo, sha)).unwrap_or_default();
+            println!("{repo} {sha}: already judged by this node: {}", done.trim());
+            if publish && home.outbox(repo, sha).exists() {
+                println!("{repo} {sha}: {}", publish_one(&home, &cfg, &pk, repo, sha));
+            }
+            return Ok(());
+        }
         let o = judge_head(&home, &cfg, &pk, repo, sha, None, publish)?;
         println!("{repo} {sha}: {o:?}");
         return match o {
@@ -561,10 +571,6 @@ fn publish_one(home: &Home, cfg: &Config, pk: &str, repo: &str, sha: &str) -> St
         Err(e) => return format!("publish failed: cannot read signed bundle: {e}"),
     };
     match receipts::publish(home, cfg, repo, sha, prefix(pk), &bytes, verdict.trim()) {
-        Ok(Published::PushedOnly(why)) => format!(
-            "pushed to {} but no pull request yet ({why}); retried next round",
-            cfg.fork
-        ),
         Ok(p) => {
             let _ = fs::write(home.published(repo, sha), format!("{} {p:?}\n", utc_now()));
             let _ = fs::remove_file(home.outbox(repo, sha));

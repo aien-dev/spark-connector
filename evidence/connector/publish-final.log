@@ -1,0 +1,17 @@
+# publish retry with the final code, 2026-10-20T00:05:30Z: the head is already judged, so the node only publishes
+spark-connector: token check: WIDE TOKEN (push to aien-sovereign-core,omega,aienos,physics,aien-protocols,aegis-runtime,spark-rsi,aien-architecture,benchmarks,synapse,interplane,aien-receipts) accepted only because --project-spark-test was given; the node still writes only to drakestapleton/aien-receipts
+aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d: already judged by this node: 2026-10-20T00:01:41Z PASS verify-bundle exit 0: AIEN Verification: PASS (3 checks, 3 required, 0 from cache) bundle 886e11ad03a6f61cd6bec4c173b184adf1e673981409fa62da0ced65ce77ff82 | judge exit exit status: 0 | signed ~/.local/state/spark-connector-l119/signed/aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d.json
+
+- file: `aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json` (new file; the project's `bundle.json` is not touched)
+- node: spark-b87b-node2 (prefix 8d750f9ae2d4086e)
+- judge commit: 10b4f851d6b082df6c2c477fbab700b551b854be
+- result: PASS
+
+Check it yourself: `aien-test verify-bundle aegis-runtime/bfa6b636f33f44a68a48d8f560c069fd1f99882d/bundle.8d750f9ae2d4086e.json --repo github.com/aien-dev/aegis-runtime --commit bfa6b636f33f44a68a48d8f560c069fd1f99882d --pubkey <the node's key from NODES.md>`. Until the node is in NODES.md this receipt is advisory only.
+
+aegis-runtime bfa6b636f33f44a68a48d8f560c069fd1f99882d: published PushedOnly { compare: "https://github.com/aien-dev/aien-receipts/compare/main...drakestapleton:aien-receipts:node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f?expand=1", why: "GitHub guard: push your branch and send the desk one line: READY <repo> <branch> <sha> <exact test command> <result>." }
+exit 0
+--- status:
+to publish  0
+published   1
+  aegis-runtime.bfa6b636f33f44a68a48d8f560c069fd1f99882d  2026-10-20T00:05:41Z PushedOnly { compare: "https://github.com/aien-dev/aien-receipts/compare/main...drakestapleton:aien-receipts:node-8d750f9ae2d4086e/aegis-runtime-bfa6b636f33f?expan

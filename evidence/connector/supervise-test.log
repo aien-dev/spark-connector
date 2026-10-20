@@ -1,0 +1,9 @@
+# supervise loop test, 2026-10-20T00:07:13Z, temp home, fake node binary that exits 1 at once
+[1]+  Done                    SPARK_CONNECTOR_HOME=$T SPARK_CONNECTOR_BIN=/bin/false setsid connector/spark-connector-supervise
+second supervisor on the same home:
+spark-connector-supervise: already running for <temp dir>
+exit 0
+node.log:
+2026-10-20T00:07:13Z supervise: starting run
+2026-10-20T00:07:13Z supervise: run exited 1, restarting in 60 s
+stopped the test supervisor (pid 2676052) by hand after the check
