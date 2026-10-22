@@ -1,0 +1,31 @@
+TEACHING REPLAY 2026-10-22 UTC
+repository: aien-dev/spark-connector
+base_sha: 46be239a8ae61593257adb6d7983a258a6f65e59
+source_sha: 7f41b4d0601aa3a0c2ccc2094afc4ae907f52d2c
+environment: macOS-26.6.2-arm64-arm-64bit-Mach-O; python 3.14.6
+tool_versions:
+git --version: git version 2.55.0
+node --version: v22.18.0
+jq --version: jq-1.7.1-apple
+openssl version: OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)
+cargo --version: cargo 1.97.1 (c980f4866 2026-06-30)
+qualification: plan/absence check PASS; connector not implemented on main
+checkout: fresh git clone --no-hardlinks --branch docs/teaching-20261022 from dedicated cohort clone
+command (from docs/TEACHING.md):
+python3 - <<'PYEX'
+from pathlib import Path
+p=Path('docs/PLAN.md').read_text()
+assert 'join' in p and 'sandbox' in p and 'two registered nodes' in p
+print('PLAN PRESENT')
+assert not Path('connector/Cargo.toml').exists()
+assert not Path('trust/NODES.md').exists()
+print('CONNECTOR UNAVAILABLE')
+PYEX
+
+stdout:
+PLAN PRESENT
+CONNECTOR UNAVAILABLE
+
+stderr:
+
+exit: 0
