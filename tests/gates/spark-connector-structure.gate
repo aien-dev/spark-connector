@@ -1,0 +1,21 @@
+gate: SPARK_CONNECTOR-STRUCTURE
+manifest_version: 2
+owner: spark-connector
+requires:
+  - portable
+inputs:
+  - README.md
+  - tests/gates/
+  - connector/
+  - docs/
+  - evidence/
+  - trust/
+run:
+  exec: tests/gates/run.sh
+  args: ["structure"]
+expects:
+  exit: 0
+  verdict: PASS
+timeout: 2m
+exactness: EXACT
+cache_scope: portable
