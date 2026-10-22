@@ -3,7 +3,7 @@
 Two streams, two directories, two branches. One desk item merges them.
 
 ## connector/ (branch connector/v0)
-Rust crate `spark-connector` (our stack: Rust; the judge itself is `aien-test` from aien-sovereign-core, built from source by the installer, pinned by commit).
+Rust crate `spark-connector` (my stack: Rust; the judge itself is `aien-test` from aien-sovereign-core, built from source by the installer, pinned by commit).
 - `join`: key pair (ed25519 via the same signing the judge already uses for bundles; reuse `aien-test bundle-sign`), prints the public key and a one-line registration request.
 - `run`: poll loop over the repos list (the same list the project's Spark uses), for each open PR head not yet judged by this node: clone or fetch into its own clones dir, run `aien-test` through the sandbox user exactly as `/usr/local/sbin/aien-run-exec` does on the project's Spark (ship that script or its equivalent), with network off for the run, sign the bundle, publish.
 - Publish: open a pull request against aien-dev/aien-receipts adding `<repo>/<sha>/bundle.<node>.json` (one file per node; never overwrites the project's own bundle), or push to a fork and open the PR. The GitHub token the node uses can only write to its own fork of aien-receipts.
