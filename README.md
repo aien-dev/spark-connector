@@ -1,3 +1,7 @@
+<!-- github-native-navigation -->
+[Source](https://github.com/aien-dev/spark-connector) · [Walkthrough](docs/TEACHING.md) · [Replay receipt](docs/teaching-replay-2026-10-22.txt) · [Issues](https://github.com/aien-dev/spark-connector/issues)
+<!-- /github-native-navigation -->
+
 # spark-connector
 
 ## How it works and how to reproduce
