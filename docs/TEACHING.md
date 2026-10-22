@@ -21,3 +21,8 @@ PYEX
 ```
 
 Expected: `PLAN PRESENT`, `CONNECTOR UNAVAILABLE`, exit 0. This checks the source-to-plan boundary only. A real positive result needs a merged binary, sandbox unit, registered key, two signed bundles and an independently checked verdict. The missing files are the negative case; do not run `join` or `run` from this snapshot. [Replay receipt](teaching-replay-2026-10-22.txt).
+
+
+### Parent fresh-checkout replay
+
+A separate coordination replay is retained in [the parent receipt](parent-replay-2026-10-22.txt). Its scope and observed exit are explicit; source review and final desk qualification remain separate. A recorded absence or expected failing baseline is not a passing implementation.
