@@ -11,7 +11,7 @@ must link to a file under `evidence/`. If it does not, it is a plan, not a fact.
 
 ## Why
 Every pull request in the AIEN repositories is verified by one machine, the project's Spark,
-before it merges. That one machine is the bottleneck. The proposed volunteer connector would check the same commit with the same judge (`aien-test`) and publish a signed receipt. The two-receipt merge route remains a plan until implementation and independent verification.
+before it merges. That one machine is the bottleneck. The proposed volunteer connector would check the same commit with the same judge ([`aien-test`](https://github.com/aien-dev/aien-sovereign-core-mv/tree/main/tools/aien-test)) and publish a signed receipt. The two-receipt merge route remains a plan until implementation and independent verification.
 
 ## Proposed interface
 The plan calls for a Unix-style service: one binary, one systemd unit, one key. No connector binary is merged here.
