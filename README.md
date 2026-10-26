@@ -1,23 +1,25 @@
 # spark-connector
 
-Connect your NVIDIA DGX Spark to the AIEN merge pipeline as a volunteer judge.
+A proposed way for a volunteer NVIDIA DGX Spark to produce independent AIEN verification receipts.
 
 **Status: pre-alpha, 2026-10-19. Nothing here is proven yet.** Every claim in this repository
 must link to a file under `evidence/`. If it does not, it is a plan, not a fact.
 
 ## Why
-Every pull request in the AIEN repositories is verified by one machine, the project's Spark,
-before it merges. That one machine is the bottleneck. A community Spark running this connector
-checks the same commits with the same judge (`aien-test`, from aien-sovereign-core) and publishes
-a signed receipt. Two independent receipts on the same commit let the desk merge without waiting
-for the project's Spark.
+AIEN's current component workflow treats GitHub pull-request checks as advisory and uses a
+signed full Spark bundle to qualify an `alpha/*` tag on a commit already on `main`
+(see [aienux's workflow](https://github.com/aien-dev/aienux/blob/main/.github/workflows/aien-verification.yml)).
+An open PR or merged commit is not an Alpha result. The proposed connector would let
+community Sparks run the pinned judge (`aien-test`, from aien-sovereign-core) and publish
+independent receipts. Whether or how those receipts affect a future desk or merge policy
+requires separate review and approval; no two-node substitution is in force here.
 
 ## What it is
-A Unix-style service: one binary, one systemd unit, one key.
-- `spark-connector join`: makes a key pair, prints the public key for the operator to register.
-- `spark-connector run`: polls the AIEN repositories for pull requests, runs the judge on each
-  head in a sandbox user (no secrets, no network during the run), signs the bundle, and
-  publishes it.
+A proposed Unix-style service: one binary, one systemd unit, one key. The following commands
+are not implemented on `main`:
+- `spark-connector join`: would make a key pair and print the public key for registration.
+- `spark-connector run`: would poll for pull requests, run the judge on each head in a
+  sandbox user (no secrets, no network during the run), sign the bundle and publish it.
 - Pull only. A volunteer Spark never accepts inbound connections and never needs a token with
   write access to AIEN code.
 

@@ -1,6 +1,6 @@
 # PLAN
 
-Two streams, two directories, two branches. One desk item merges them.
+Two proposed streams, two directories, two branches. Integration and any effect on merge policy require separate approval; neither stream is implemented on `main`.
 
 ## connector/ (branch connector/v0)
 Rust crate `spark-connector` (our stack: Rust; the judge itself is `aien-test` from aien-sovereign-core, built from source by the installer, pinned by commit).
@@ -11,7 +11,7 @@ Rust crate `spark-connector` (our stack: Rust; the judge itself is `aien-test` f
 - Evidence: a full run on the project's Spark under a second node key (so two receipts exist on one commit), logged under evidence/.
 
 ## trust/ (branch trust/v0)
-- `NODES.md` registry format for aien-receipts (public key, operator, Spark serial or GPU UUID, date, who approved) and the rule that only Drake merges registry changes.
-- Verdict policy for the desk: a head is merge-grade when (a) the project's Spark says READY, or (b) two registered nodes say READY on the exact head and `aien-test verify-bundle` passes on both bundles. Write it as a change to the desk procedure (a doc here; the desk applies it).
-- Threat notes in plain words: a malicious PR running on a volunteer box (sandbox, no secrets, network off), a malicious node (registry, two-node rule, spot re-verification by the project's Spark), a stale judge (pinned judge commit in every bundle; desk refuses bundles from an unpinned or older judge).
+- Proposed `NODES.md` registry format for aien-receipts (public key, operator, Spark serial or GPU UUID, date, who approved), with registry changes requiring Drake's approval.
+- Proposed desk policy for review, not a current merge rule: a head could be considered for desk review when (a) the project's Spark says READY, or (b) two registered nodes say READY on the exact head and `aien-test verify-bundle` passes on both bundles. This must not substitute for current Alpha qualification or take effect without the maintainer's explicit policy decision.
+- Threat notes in plain words: a malicious PR running on a volunteer box (sandbox, no secrets, network off), a malicious node (registry, proposed two-node rule, spot re-verification by the project's Spark), a stale judge (pinned judge commit in every bundle; proposed desk refusal of bundles from an unpinned or older judge).
 - Evidence: `aien-test verify-bundle` run on a community-style bundle from the connector stream.
