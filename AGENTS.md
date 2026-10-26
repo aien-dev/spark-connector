@@ -1,6 +1,6 @@
-# spark-connector (volunteer DGX Spark judge for the AIEN merge pipeline)
+# spark-connector (proposed volunteer DGX Spark verifier)
 
-> spark-connector will let an owner of an NVIDIA DGX Spark check AIEN pull requests with the same judge the project's own Spark uses (`aien-test`, from aien-sovereign-core) and publish a signed receipt, so that two independent receipts on the same commit can stand in for the project's Spark. It is pre-alpha. On `main` the repository is a plan and a skeleton: `README.md`, `docs/PLAN.md`, and empty `connector/`, `trust/` and `evidence/` directories. Licensed AGPL-3.0.
+> spark-connector is planned to let an owner of an NVIDIA DGX Spark check AIEN revisions with the project's judge (`aien-test`, from aien-sovereign-core) and publish an independent signed receipt. This is not a current merge gate or a replacement for Spark Alpha qualification. It is pre-alpha. On `main` the repository is a plan and a skeleton: `README.md`, `docs/PLAN.md`, and empty `connector/`, `trust/` and `evidence/` directories. Licensed AGPL-3.0.
 
 Shared rules: read https://www.aienos.com/agents/RULES.md first. This file adds what is specific to this repository; where the two differ, this file wins here.
 
@@ -45,8 +45,8 @@ grep -rnP '[\x{2013}\x{2014}]' --include='*.md' .
 
 ## Safety and approvals
 
-- Changes to the node registry (`NODES.md` in aien-receipts, per `docs/PLAN.md`) and to the verdict policy that decides when a head is merge-grade need the maintainer's approval. They decide what can merge across AIEN.
-- Never weaken the two-node rule, the pinned judge commit, the sandbox, or the network-off rule to get a run through.
+- Changes to the proposed node registry (`NODES.md` in aien-receipts, per `docs/PLAN.md`) and any policy that would use volunteer verdicts for merges need the maintainer's explicit approval. No two-node merge substitution is active on `main`.
+- Do not weaken the proposed two-node condition, the pinned judge commit, the sandbox, or the network-off condition to get a run through.
 - Never commit private keys, tokens, or node identifiers that are not meant to be public.
 - `main` has no required checks or reviews configured. Still work on a branch and merge through a pull request; never force-push.
 
