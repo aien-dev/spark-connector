@@ -5,6 +5,19 @@ A proposed way for a volunteer NVIDIA DGX Spark to produce independent AIEN veri
 **Status: pre-alpha, 2026-10-19. Nothing here is proven yet.** Every claim in this repository
 must link to a file under `evidence/`. If it does not, it is a plan, not a fact.
 
+## Human-Directed Agentic Engineering
+
+Development follows Human-Directed Agentic Engineering (HDAE): humans define goals,
+architecture, constraints, acceptance criteria, and stopping points; agents implement,
+execute checks, diagnose failures, and revise within those boundaries. Human review
+retains responsibility for claims, acceptance, and release decisions. This development
+method does not establish that the proposed connector has been implemented or qualified.
+
+For the documented method and a systems-software case study, see Gregory M. Kurtzer,
+[*Ginux: Building an Independent Kernel That Runs Linux Userspace through
+Human-Directed Agentic Engineering* (2026)](https://doi.org/10.5281/zenodo.23682548).
+
+
 ## Why
 AIEN's current component workflow treats GitHub pull-request checks as advisory and uses a
 signed full Spark bundle to qualify an `alpha/*` tag on a commit already on `main`
